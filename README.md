@@ -3,24 +3,23 @@ php artisan db:seed --class=RoleSeeder
 ## How to use
 
 
-1- git clone https://github.com/rindrajosia/scopic.git 
-2- cd scopic
-3- git checkout back
-3- composer install
-4- npm install
-5- cp .env.example .env
-6- create mysql databe called "scopic"
-7- php artisan migrate
-8- php artisan db:seed --class=RoleSeeder
-9- php artisan db:seed --class=UserSeeder
-10- php artisan db:seed --class=ProductSeeder
-11- php artisan serve
+- git clone https://github.com/rindrajosia/scopic.git 
+- cd scopic
+- git checkout back
+- composer install
+- npm install
+- cp .env.example .env
+- create mysql databe called "scopic"
+- php artisan migrate
+- php artisan db:seed --class=RoleSeeder
+- php artisan db:seed --class=UserSeeder
+- php artisan db:seed --class=ProductSeeder
+- php artisan serve
 
 ## Techno
-1- PHP7
-2- Laravel
-3- Mysql
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- PHP7
+- Laravel
+- Mysql
 
 ## Learning Laravel
 There are still many improvment that I can do on this project but, with the limited time, I was not able to implement them.
