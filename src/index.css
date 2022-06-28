@@ -49,12 +49,9 @@ img {
   border: 1px solid #ebebeb;
   border-radius: 0.25rem;
   margin: 0.5rem;
-  background-color: #ececec;
-  box-shadow: 10px 10px #cfc9c9;
 }
 
 .expired-notice > span {
-  font-size: 2.5rem;
   font-weight: bold;
   color: red;
 }
