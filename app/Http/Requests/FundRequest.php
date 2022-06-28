@@ -26,7 +26,6 @@ class FundRequest extends FormRequest
         return [
           'user_id' => ['required','numeric'],
           'amount_start' => ['required','numeric'],
-          'amount_spend' => ['required','numeric'],
           'percentage' => ['required','numeric']
         ];
     }

@@ -50,6 +50,9 @@ class AuthController extends Controller
        $token = cookie('jwt', $jwt, 60*24);
        return response([
          "message" => "Loged In",
+		 "id" => Auth::user()->id,
+		 "role_id" => Auth::user()->role_id,
+		 "name" => Auth::user()->name,
          "token" => $jwt,
          ], 200)->withCookie($token);
     }

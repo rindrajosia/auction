@@ -25,9 +25,10 @@ class ProductRequest extends FormRequest
     {
         return [
           'title' => ['required'],
-          'description' => ['required','min:10'],
+          'description' => ['required'],
           'regular_price' => ['required','numeric'],
           'start_bid' => ['required'],
+		  'image' => ['required'],
           'bid_end_date' => ['required']
         ];
     }

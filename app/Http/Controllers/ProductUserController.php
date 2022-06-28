@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ProductUser;
 use App\Models\Fund;
+use App\Models\Product;
 use \App\Http\Requests\ProducUserRequest;
+use DateTime;
+use Carbon\Carbon;
 
 class ProductUserController extends Controller
 {
@@ -18,6 +21,11 @@ class ProductUserController extends Controller
     public function create(ProducUserRequest $request)
     {
         $validatedData = $request->validated();
+		if(!Product::checkDate($request->product_id)){
+			return response([
+				  "message" => "Bid date expired"
+				], 400);
+		}	
         if(!$this->checkIfUpBid($request->product_id, $request->bid_amount) && $request->status != 1){
             return response([
               "message" => "Bid less than the Max Bid"
@@ -52,8 +60,10 @@ class ProductUserController extends Controller
 
     public function show($product_id)
     {
-        $bids = ProductUser::Where("product_id", $product_id)->get();
-        if(!$bids) {
+        $bids = ProductUser::With('bidder')
+						->Where("product_id", $product_id)
+						->get();
+        if(count($bids) == 0) {
           return response(["message" => "No Bid for that product"], 404);
         }
         return response($bids, 200);

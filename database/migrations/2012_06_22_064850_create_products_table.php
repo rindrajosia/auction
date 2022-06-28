@@ -19,6 +19,7 @@ class CreateProductsTable extends Migration
             $table->text('description');
             $table->double('regular_price');
             $table->double('start_bid');
+			$table->text('image');
             $table->datetime('bid_end_date');
             $table->timestamps();
         });

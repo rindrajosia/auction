@@ -41,15 +41,18 @@ class ProductController extends Controller
         return response(["message" => "No corresponding product"], 404);
       }
       $product->update($request->all());
-      return response($product, 200);
+      return response([
+            "message" => "Product updated"
+       ], 200);
     }
 
     public function destroy($id)
     {
-        $product=Product::find(1);
+        $product=Product::find($id);
         if(!$product) {
           return response(["message" => "No corresponding product"], 404);
         }
+		$product->bids()->delete();
         $product->delete();
         return response([
           "message" => "Product removed"
