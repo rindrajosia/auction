@@ -13,30 +13,30 @@ const DeleteProductScreen = ({ match, history }) => {
 	const [products, setProduct] = useState({
 		title: ''
 	});
-	
+
 	const dispatch = useDispatch();
 
 	const productDetails = useSelector(state => state.productDetails);
-	
+
 	const delProduct = useSelector(state => state.delProduct);
-	
+
 	const { loading, error, product } = delProduct;
-	
-	
+
+
 	useEffect(() => {
 		dispatch(listProductDetails(match.params.id));
 	}, [dispatch, match.params.id]);
-	
+
 	useEffect(() => {
 		setProduct({...productDetails.product});
 	}, [productDetails.product]);
 
-	
+
 	const submitHandler = e => {
 		e.preventDefault();
 		dispatch(deleteProduct(match.params.id, history))
 	}
- 
+
 
   return (
 		<section className="form mt-5">
@@ -49,11 +49,11 @@ const DeleteProductScreen = ({ match, history }) => {
 								{error && <Message variant='danger'>{ error }</Message>}
 								{loading && <Loader />}
 								{error && <Message variant='danger'>{ error }</Message>}
-								
-								
-								
+
+
+
 								<form onSubmit={submitHandler}>
-									
+
 									<div className="form-group">
 										<label>Title</label>
 										<input
@@ -65,22 +65,22 @@ const DeleteProductScreen = ({ match, history }) => {
 											disabled={false}
 										/>
 									</div>
-									
-									
-									
-									
-									
-									
-									<Button 
-										type='submit' 
-										className="btn btn-primary btn-block" 
+
+
+
+
+
+
+									<Button
+										type='submit'
+										className="btn btn-primary btn-block"
 										variant='primary'
 										>
-									  Sing in
+									  Delete
 									</Button>
 								  </form>
-								
-								
+
+
 							</div>
 						</div>
 					</div>

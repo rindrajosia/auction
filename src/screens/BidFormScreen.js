@@ -11,8 +11,8 @@ const BidFormScreen = ({ product_id, history }) => {
 	const [bids, setBid] = useState({
 		bid_amount: "", stat: false, product_id: product_id
 	});
-	
-	
+
+
 	const handleChange = e => {
     const { name, value } = e.target;
 	if(name != "stat"){
@@ -23,7 +23,7 @@ const BidFormScreen = ({ product_id, history }) => {
   };
 
 	const [errorSubmit, setError] = React.useState("");
-	
+
 	const dispatch = useDispatch();
 
 	const bidC = useSelector(state => state.createBid);
@@ -33,27 +33,27 @@ const BidFormScreen = ({ product_id, history }) => {
 	const submitHandler = e => {
 		e.preventDefault();
 		setError("")
-		
+
 		console.log(bids.stat);
 		if(bids.bid_amount != ""){
-			
+
 			dispatch(addBid(bids))
 		}else {
 			setError("Please add bid amount start");
 		}
-		
+
 	}
   return (
     <div className="card mb-3">
-		
+
 		<h5 className="card-header bg-primary text-white">Add BID</h5>
-			
+
 				<div className="card-body">
 								{error && <Message variant='danger'>{ error }</Message>}
 								{errorSubmit && <Message variant='danger'>{ errorSubmit }</Message>}
 								{loading && <Loader />}
 								{bid && <Message variant='primary'>{ bid.message }</Message>}
-								
+
 								<form onSubmit={submitHandler}>
 									<div className="form-group">
 										<label>Bid amount</label>
@@ -67,32 +67,32 @@ const BidFormScreen = ({ product_id, history }) => {
 											required
 										/>
 									</div>
-									
+
 									<div className="form-group">
 										<label>Or Check to activate Auto bidding</label>
-										<input 
+										<input
 											type="checkbox"
 											name="stat"
 											className="form-control"
 											checked={bids.stat}
 											onChange={handleChange}
 										/>
-										
+
 									</div>
-									
-									
-									<Button 
-										type='submit' 
-										className="btn btn-primary btn-block" 
+
+
+									<Button
+										type='submit'
+										className="btn btn-primary btn-block"
 										variant='primary'
 										>
-									  Sing in
+									  Bid now
 									</Button>
 								  </form>
-								
-								
+
+
 							</div>
-			
+
 	</div>
   )
 }
