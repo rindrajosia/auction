@@ -7,7 +7,7 @@ import { listBid } from '../actions/bidActions';
 
 
 const Bids = ({ product_id }) => {
-	
+
 	const dispatch = useDispatch();
 
 	const bidList = useSelector(state => state.bidList);
@@ -18,10 +18,9 @@ const Bids = ({ product_id }) => {
 		dispatch(listBid(product_id));
 	}, [dispatch, product_id]);
 
-  console.log(error);
   return (
     <div className="card mb-3">
-		
+
 		<h5 className="card-header bg-primary text-white">BID HISTORY</h5>
 			{loading ? (
 			<Loader />
@@ -32,15 +31,15 @@ const Bids = ({ product_id }) => {
 				<ul className="list-group mb-3">
 					{bids.map(bid =>(
 						<li key={bid.id} className="list-group-item">
-							Bid amount: {bid.bid_amount}$ 
+							Bid amount: {bid.bid_amount}$
 							User: {bid.bidder.name}
 							Date: {bid.created_at}</li>
 					))}
-					
+
 				</ul>
 			</div>
 		 )}
-			
+
 	</div>
   )
 }

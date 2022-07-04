@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Button, Form, Col, Row } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
-import FormContainer from '../components/FormContainer';
-import { createProduct } from '../actions/productActions';
-import { Redirect } from 'react-router-dom';
 import { listProductDetails } from '../actions/productActions';
 import { updateProduct } from '../actions/productActions';
 
@@ -15,36 +11,36 @@ const UpProductScreen = ({ match, history }) => {
 	const [products, setProduct] = useState({
 		title: '', description: '', regular_price: ''
 	});
-	
-	
+
+
 	const handleChange = e => {
 		const { name, value } = e.target;
 		setProduct({ ...products, [name]: value });
-		 
+
   };
 	const dispatch = useDispatch();
 
 	const productDetails = useSelector(state => state.productDetails);
-	
+
 	const upProduct = useSelector(state => state.upProduct);
-	
+
 	const { loading, error, product } = upProduct;
-	
-	
+
+
 	useEffect(() => {
 		dispatch(listProductDetails(match.params.id));
 	}, [dispatch, match.params.id]);
-	
+
 	useEffect(() => {
 		setProduct({...productDetails.product});
 	}, [productDetails.product]);
 
-	
+
 	const submitHandler = e => {
 		e.preventDefault();
 		dispatch(updateProduct(products, match.params.id, history))
 	}
- 
+
 
   return (
 		<section className="form mt-5">
@@ -58,11 +54,11 @@ const UpProductScreen = ({ match, history }) => {
 								{loading && <Loader />}
 								{error && <Message variant='danger'>{ error }</Message>}
 								{product && <Message variant='primary'>{ product.message }</Message>}
-								
-								
-								
+
+
+
 								<form onSubmit={submitHandler}>
-									
+
 									<div className="form-group">
 										<label>Title</label>
 										<input
@@ -75,7 +71,7 @@ const UpProductScreen = ({ match, history }) => {
 											required
 										/>
 									</div>
-									
+
 									<div className="form-group">
 										<label>Description</label>
 										<textarea
@@ -92,8 +88,8 @@ const UpProductScreen = ({ match, history }) => {
 											>Not less than 10 characters</small
 										>
 									</div>
-									
-							
+
+
 									<div className="form-group">
 										<label>Price</label>
 										<input
@@ -106,22 +102,22 @@ const UpProductScreen = ({ match, history }) => {
 											required
 										/>
 									</div>
-									
-									
-									
-									
-									
-									
-									<Button 
-										type='submit' 
-										className="btn btn-primary btn-block" 
+
+
+
+
+
+
+									<Button
+										type='submit'
+										className="btn btn-primary btn-block"
 										variant='primary'
 										>
-									  Sing in
+									  Update
 									</Button>
 								  </form>
-								
-								
+
+
 							</div>
 						</div>
 					</div>

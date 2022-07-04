@@ -1,29 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { filterProducts, listProducts } from '../actions/productActions';
-import { Button, Form, Col, Row } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 
 const Filter = () => {
 	const dispatch = useDispatch();
 	const productList = useSelector(state => state.productList);
-	
+
 	const [filter, setFilter] = useState({
 		title: '', description: ''
 	});
-	
+
 	const handleChange = e => {
 		const { name, value } = e.target;
-	
+
 		setFilter({ ...filter, [name]: value });
-	
+
 	};
-	
-	
+
+
 	const submitHandler = e => {
 		e.preventDefault();
 		if(filter.title.trim() === '' && filter.description.trim() ===''){
 			dispatch(listProducts());
-		} else {	
+		} else {
 			dispatch(filterProducts(productList.filteredItems, filter.title, filter.description));
 		}
 	}
@@ -57,17 +57,17 @@ const Filter = () => {
               </div>
             </div>
           </div>
-          <Button 
-			type='submit' 
-			className="btn btn-primary btn-block" 
+          <Button
+			type='submit'
+			className="btn btn-primary btn-block"
 			variant='primary'
 			>
-			Sing in
+			Search
 		</Button>
         </form>
       </div>
-	
-    
+
+
   )
 }
 

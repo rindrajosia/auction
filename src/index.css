@@ -26,6 +26,11 @@ img {
   height: 100%
 }
 
+.block {
+  display: block;
+}
+
+
 .countdown-container {
   display: flex;
   flex-direction: column;
@@ -71,4 +76,3 @@ img {
   align-items: center;
   color: #000;
 }
-

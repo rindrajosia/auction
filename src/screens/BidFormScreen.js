@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Form, Col, Row } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import { addBid } from '../actions/bidActions';
@@ -15,7 +15,7 @@ const BidFormScreen = ({ product_id, history }) => {
 
 	const handleChange = e => {
     const { name, value } = e.target;
-	if(name != "stat"){
+	if(name !== "stat"){
 		setBid({ ...bids, [name]: value });
 	}else{
 		setBid({ ...bids, [name]: !bids.stat });
@@ -34,8 +34,7 @@ const BidFormScreen = ({ product_id, history }) => {
 		e.preventDefault();
 		setError("")
 
-		console.log(bids.stat);
-		if(bids.bid_amount != ""){
+		if(bids.bid_amount !== ""){
 
 			dispatch(addBid(bids))
 		}else {

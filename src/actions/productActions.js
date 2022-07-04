@@ -12,7 +12,6 @@ import {
   CREATE_PRODUCT_FAIL,
   UPDATE_PRODUCT_REQUEST,
   UPDATE_PRODUCT_SUCCESS,
-  UPDATE_PRODUCT_FAIL,
   DELETE_PRODUCT_REQUEST,
   DELETE_PRODUCT_SUCCESS,
   DELETE_PRODUCT_FAIL,
@@ -47,7 +46,7 @@ export const sortProducts = (items, sort) => (dispatch) => {
 
 
 export const filterProducts = (products, title, description) =>(dispatch) => {
-	
+
 	const resultTitle = title === "" ? products : products.filter(product => product.title.toUpperCase().includes(title.toUpperCase()));
 	const resultDesription = description === "" ? resultTitle : resultTitle.filter(product => product.description.toUpperCase().includes(description.toUpperCase()));
 
@@ -105,9 +104,8 @@ export const createProduct = (donnee, history) => async (dispatch, getState) => 
 	dispatch({
       type: CREATE_PRODUCT_REQUEST
     })
-	
-	console.log(donnee);
-	
+
+
 	axios.post('/api/product', donnee)
 			  .then(response => {
 				    dispatch({
@@ -132,9 +130,8 @@ export const updateProduct = (donnee, product_id, history) => async (dispatch, g
 	dispatch({
       type: UPDATE_PRODUCT_REQUEST
     })
-	
-	console.log(product_id);
-	
+
+
 	axios.put(`/api/product/${product_id}`, donnee)
 			  .then(response => {
 				    dispatch({
@@ -159,8 +156,7 @@ export const deleteProduct = (product_id, history) => async (dispatch, getState)
 	dispatch({
       type: DELETE_PRODUCT_REQUEST
     })
-	
-	console.log(product_id);
+
 	axios.delete(`/api/product/${product_id}`)
 			  .then(response => {
 				    dispatch({

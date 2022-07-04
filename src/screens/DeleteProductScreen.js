@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Button, Form, Col, Row } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
-import FormContainer from '../components/FormContainer';
-import { Redirect } from 'react-router-dom';
 import { listProductDetails } from '../actions/productActions';
 import { deleteProduct } from '../actions/productActions';
 
@@ -20,7 +17,7 @@ const DeleteProductScreen = ({ match, history }) => {
 
 	const delProduct = useSelector(state => state.delProduct);
 
-	const { loading, error, product } = delProduct;
+	const { loading, error } = delProduct;
 
 
 	useEffect(() => {

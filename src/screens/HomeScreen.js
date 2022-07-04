@@ -5,6 +5,7 @@ import SideBar from '../components/SideBar';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import { listProducts } from '../actions/productActions';
+import { Button } from 'react-bootstrap';
 
 
 const HomeScreen = () => {
@@ -17,35 +18,35 @@ const HomeScreen = () => {
 	const [paginate, setPaginate] = useState([]);
 	const [page, setPage] = useState();
 
-	
+
 	useEffect(() => {
 		dispatch(listProducts());
 	}, [dispatch])
-	
+
 	useEffect(() => {
-		
 		setPaginate(filteredItems.slice(offset, item));
 		setPage(Math.ceil(filteredItems.length/10));
-		console.log(filteredItems.length);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [filteredItems, products])
-	
-	
+
+
 	useEffect(() => {
 		setPaginate(filteredItems.slice(offset, item));
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [offset, item])
-	
+
 	const showPage = (end) => {
-		if(end == 1){
+		if(end === 1){
 			set0ffset(0);
 			setItem(end * 10);
 		}else {
 			set0ffset((end * 10) - 10);
 			setItem(end * 10);
 		}
-		
+
 	}
-	
-  
+
+
   return (
 		<section className="browse my-5">
 		  <div className="container">
@@ -53,7 +54,7 @@ const HomeScreen = () => {
 			  <SideBar />
 
 			  <div className="col-md-8">
-			  
+
 				  {loading ? (
 						<Loader />
 					  ) : error ? (
@@ -65,19 +66,19 @@ const HomeScreen = () => {
 						  ))}
 						</>
 					  )}
-					  
-				  
+
+
 
 
 				<nav aria-label="Page navigation example">
 				  <ul className="pagination">
 						  {
 							[...Array(page).keys()].map(p => (
-							  <li key={p + 1} className="page-item" onClick={(e)=>{showPage(p+1)}}><a className="page-link" href="#">{p + 1}</a></li>
+							  <li key={p + 1} className="page-item" onClick={(e)=>{showPage(p+1)}}><Button className="page-link">{p + 1}</Button></li>
 							))
 						}
-						
-					
+
+
 				  </ul>
 				</nav>
 			  </div>

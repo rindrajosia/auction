@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Button, Form, Col, Row } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
-import FormContainer from '../components/FormContainer';
 import { uploadImage } from '../actions/cloudinaryActions';
 import { createProduct } from '../actions/productActions';
-import { Redirect } from 'react-router-dom';
 
 const ProductFormScreen = ({ location, history }) => {
 
 	const [products, setProduct] = useState({
 		title: '', description: '', regular_price: '', start_bid: '', image: '', bid_end_date: ''
 	});
-	
+
 	const handleChange = e => {
     const { name, value } = e.target;
     if (name !== 'image') {
@@ -23,31 +20,32 @@ const ProductFormScreen = ({ location, history }) => {
       setProduct({ ...products, [name]: e.target.files[0] });
     }
   };
-	
+
 	const dispatch = useDispatch();
-	
+
 	const imgUrl = useSelector(state => state.imageUrl);
 
 	const { loading, error, imageUrl } = imgUrl;
-	
+
 	const createProd = useSelector(state => state.createProduct);
-	
+
 
 	const { loadingProduct, errorProduct, product } = createProd;
-	
+
 	  useEffect(() => {
-		if(imageUrl) {
-		  const data = { ...products, image: imageUrl};
-		  dispatch(createProduct(data, history))
-		}
+			if(imageUrl) {
+			  const data = { ...products, image: imageUrl};
+			  dispatch(createProduct(data, history))
+			}
+			// eslint-disable-next-line react-hooks/exhaustive-deps
 	  }, [imageUrl]);
-	  
-	
+
+
 	const submitHandler = e => {
 		e.preventDefault();
 		dispatch(uploadImage(products.image))
 	}
- 
+
 
   return (
 		<section className="form mt-5">
@@ -62,11 +60,11 @@ const ProductFormScreen = ({ location, history }) => {
 								{errorProduct && <Message variant='danger'>{ errorProduct }</Message>}
 								{loadingProduct && <Loader />}
 								{product && <Message variant='primary'>{ product.message }</Message>}
-								
-								
-								
+
+
+
 								<form onSubmit={submitHandler}>
-									
+
 									<div className="form-group">
 										<label>Title</label>
 										<input
@@ -79,7 +77,7 @@ const ProductFormScreen = ({ location, history }) => {
 											required
 										/>
 									</div>
-									
+
 									<div className="form-group">
 										<label>Description</label>
 										<textarea
@@ -97,8 +95,8 @@ const ProductFormScreen = ({ location, history }) => {
 											>Not less than 10 characters</small
 										>
 									</div>
-									
-							
+
+
 									<div className="form-group">
 										<label>Price</label>
 										<input
@@ -111,7 +109,7 @@ const ProductFormScreen = ({ location, history }) => {
 											required
 										/>
 									</div>
-									
+
 									<div className="form-group">
 										<label>Bid amount start</label>
 										<input
@@ -124,7 +122,7 @@ const ProductFormScreen = ({ location, history }) => {
 											required
 										/>
 									</div>
-									
+
 									<div className="form-group">
 										<label>Bid End Date</label>
 										<input
@@ -139,10 +137,10 @@ const ProductFormScreen = ({ location, history }) => {
 									<small className="form-text text-muted"
 											>Format should YYYY-MM-DD</small
 										>
-									
-								
-									
-									
+
+
+
+
 									<div className="form-group">
 										<label>Product Image</label>
 										<input
@@ -155,20 +153,20 @@ const ProductFormScreen = ({ location, history }) => {
 											className="form-control"
 										/>
 									</div>
-									
-									
-									
-									
-									<Button 
-										type='submit' 
-										className="btn btn-primary btn-block" 
+
+
+
+
+									<Button
+										type='submit'
+										className="btn btn-primary btn-block"
 										variant='primary'
 										>
 									  Sing in
 									</Button>
 								  </form>
-								
-								
+
+
 							</div>
 						</div>
 					</div>

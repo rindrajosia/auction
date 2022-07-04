@@ -1,7 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { LinkContainer } from 'react-router-bootstrap';
-import { Navbar, Nav, Container } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../actions/userAction';
 import Notification from './Notification';
@@ -31,17 +29,17 @@ const Header = () => {
 
 				<div className="collapse navbar-collapse" id="navbarSupportedContent">
 								<ul className="navbar-nav ml-auto">
-													
+
 									{ userInfo ? (
 										<li className="nav-item dropdown">
 											<Link className="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
 												<i className="fas fa-user" aria-hidden="true"></i> {userInfo.name}
 											</Link>
 											<div className="dropdown-menu">
-												{userInfo.role_id == 1 && (
+												{userInfo.role_id === 1 && (
 												<Link className="dropdown-item" to="/product" >Add Product</Link>
 												)}
-												{userInfo.role_id == 2 && (
+												{userInfo.role_id === 2 && (
 												<Link className="dropdown-item" to="/fund" >Add Fund</Link>
 												)}
 												<div className="dropdown-divider"></div>
@@ -56,12 +54,12 @@ const Header = () => {
 											</Link>
 										</li>
 									)}
-																
+
 								</ul>
 				</div>
-				
+
 			  </div>
-			  
+
 			</nav>
 			{ userInfo && (
 					<Notification userInfo = {userInfo}/>

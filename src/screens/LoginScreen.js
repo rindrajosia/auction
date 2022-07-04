@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Button, Form, Col, Row } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
-import FormContainer from '../components/FormContainer';
 import { login } from '../actions/userAction';
 
 const LoginScreen = ({ location, history }) => {
@@ -39,9 +37,9 @@ const LoginScreen = ({ location, history }) => {
 								<h1><i className="fas fa-sign-in-alt"></i> Login</h1>
 								{error && <Message variant='danger'>{ error }</Message>}
 								{loading && <Loader />}
-								
+
 								<form onSubmit={submitHandler}>
-									
+
 									<Form.Group className="form-group" controlId='email'>
 									  <Form.Label>Email Address</Form.Label>
 									  <Form.Control
@@ -53,8 +51,8 @@ const LoginScreen = ({ location, history }) => {
 										onChange={(e) => setEmail(e.target.value)}>
 									  </Form.Control>
 									</Form.Group>
-									
-							
+
+
 									<Form.Group className="form-group mb-4" controlId='password'>
 									  <Form.Label>Password</Form.Label>
 									  <Form.Control
@@ -70,8 +68,8 @@ const LoginScreen = ({ location, history }) => {
 									  Sing in
 									</Button>
 								  </form>
-								
-								
+
+
 							</div>
 						</div>
 					</div>
