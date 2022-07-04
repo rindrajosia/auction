@@ -5,12 +5,16 @@ import Message from '../components/Message';
 import Loader from '../components/Loader';
 import { uploadImage } from '../actions/cloudinaryActions';
 import { createProduct } from '../actions/productActions';
+import DatePicker from "react-datepicker";
 
 const ProductFormScreen = ({ location, history }) => {
 
 	const [products, setProduct] = useState({
 		title: '', description: '', regular_price: '', start_bid: '', image: '', bid_end_date: ''
 	});
+
+	const [startDate, setStartDate] = useState(new Date());
+
 
 	const handleChange = e => {
     const { name, value } = e.target;
@@ -34,7 +38,7 @@ const ProductFormScreen = ({ location, history }) => {
 
 	  useEffect(() => {
 			if(imageUrl) {
-			  const data = { ...products, image: imageUrl};
+			  const data = { ...products, image: imageUrl, bid_end_date: startDate.toISOString().slice(0, 10)};
 			  dispatch(createProduct(data, history))
 			}
 			// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -57,7 +61,7 @@ const ProductFormScreen = ({ location, history }) => {
 								<h1><i className="fas fa-sign-in-alt"></i> Create Product</h1>
 								{error && <Message variant='danger'>{ error }</Message>}
 								{loading && <Loader />}
-								{errorProduct && <Message variant='danger'>{ errorProduct }</Message>}
+								{errorProduct && <Message variant='danger'>{ errorProduct.message }</Message>}
 								{loadingProduct && <Loader />}
 								{product && <Message variant='primary'>{ product.message }</Message>}
 
@@ -125,14 +129,11 @@ const ProductFormScreen = ({ location, history }) => {
 
 									<div className="form-group">
 										<label>Bid End Date</label>
-										<input
-											type="text"
-											name="bid_end_date"
-											value={products.bid_end_date}
-											onChange={handleChange}
-											required
-											className="form-control"
-										/>
+										<DatePicker
+								      selected={startDate}
+								      onChange={(date) => setStartDate(date)}
+											dateFormat="yyyy-MM-dd"
+								    />
 									</div>
 									<small className="form-text text-muted"
 											>Format should YYYY-MM-DD</small
@@ -162,7 +163,7 @@ const ProductFormScreen = ({ location, history }) => {
 										className="btn btn-primary btn-block"
 										variant='primary'
 										>
-									  Sing in
+									  Create
 									</Button>
 								  </form>
 
