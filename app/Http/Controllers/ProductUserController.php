@@ -21,11 +21,11 @@ class ProductUserController extends Controller
     public function create(ProducUserRequest $request)
     {
         $validatedData = $request->validated();
-		if(!Product::checkDate($request->product_id)){
-			return response([
-				  "message" => "Bid date expired"
-				], 400);
-		}	
+    		if(!Product::checkDate($request->product_id)){
+    			return response([
+    				  "message" => "Bid date expired"
+    				], 400);
+    		}
         if(!$this->checkIfUpBid($request->product_id, $request->bid_amount) && $request->status != 1){
             return response([
               "message" => "Bid less than the Max Bid"
